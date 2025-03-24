@@ -1,82 +1,59 @@
-# Angular Streaming com SSE
+# AngularStreamingApp
 
-Este projeto é uma aplicação Angular que demonstra como implementar streaming de dados em tempo real usando Server-Sent Events (SSE). A aplicação consome uma API Spring Boot que fornece streaming de tokens e respostas simuladas de LLM.
+This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.4.
 
-## Funcionalidades
+## Development server
 
-- **Streaming de Tokens**: Recebe tokens individuais de um texto enviado para a API
-- **Streaming de LLM**: Recebe uma resposta simulada de um modelo de linguagem, palavra por palavra
+To start a local development server, run:
 
-## Tecnologias Utilizadas
-
-- Angular 19+
-- TypeScript
-- RxJS
-- Server-Sent Events (SSE)
-
-## Estrutura do Projeto
-
-```
-angular-streaming-app/
-├── src/
-│   ├── app/
-│   │   ├── components/
-│   │   │   ├── token-stream/       # Componente para exibir tokens
-│   │   │   └── llm-stream/         # Componente para exibir resposta do LLM
-│   │   ├── services/
-│   │   │   └── streaming.service.ts # Serviço para comunicação com a API
-│   │   ├── app.component.*         # Componente principal
-│   │   ├── app.config.ts           # Configuração da aplicação
-│   │   └── app.routes.ts           # Rotas da aplicação
-│   ├── index.html
-│   └── main.ts
-├── proxy.conf.json                 # Configuração de proxy para evitar CORS
-└── package.json
+```bash
+ng serve
 ```
 
-## Pré-requisitos
+Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
 
-- Node.js (recomendado v16+)
-- Angular CLI
-- API Spring Boot de streaming rodando na porta 8080
+## Code scaffolding
 
-## Como Executar
+Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
 
-1. Clone este repositório
-2. Instale as dependências:
-   ```
-   cd angular-streaming-app
-   npm install
-   ```
-3. Certifique-se de que a API Spring Boot esteja rodando na porta 8080
-4. Inicie a aplicação Angular:
-   ```
-   npm start
-   ```
-5. Acesse a aplicação em: `http://localhost:4200`
+```bash
+ng generate component component-name
+```
 
-## Funcionamento
+For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
 
-### Server-Sent Events (SSE)
+```bash
+ng generate --help
+```
 
-O projeto utiliza Server-Sent Events para estabelecer uma conexão unidirecional entre servidor e cliente, permitindo que o servidor envie dados para o cliente em tempo real. 
+## Building
 
-No Angular, isso é implementado através da API nativa `EventSource` que é encapsulada em observables do RxJS para melhor integração com o Angular.
+To build the project run:
 
-### Fluxo de Dados
+```bash
+ng build
+```
 
-1. O cliente inicia uma conexão SSE com o servidor
-2. O servidor mantém a conexão aberta e envia dados incrementalmente
-3. O cliente recebe os dados e atualiza a interface em tempo real
-4. Quando o streaming termina, o servidor fecha a conexão
+This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
 
-## API Backend
+## Running unit tests
 
-A API de backend possui dois endpoints principais:
+To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
 
-- `/api/stream/tokens`: Recebe um prompt e retorna os tokens um a um
-- `/api/stream/llm`: Simula a resposta de um LLM, retornando palavras uma a uma
+```bash
+ng test
+```
 
-## Licença
+## Running end-to-end tests
 
-Este projeto está licenciado sob a licença MIT.
+For end-to-end (e2e) testing, run:
+
+```bash
+ng e2e
+```
+
+Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+
+## Additional Resources
+
+For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
