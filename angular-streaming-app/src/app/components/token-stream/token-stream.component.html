@@ -1,0 +1,45 @@
+<div class="token-stream-container">
+  <h2>Streaming de Tokens</h2>
+  
+  <div class="form-container">
+    <div class="input-group">
+      <label for="prompt">Prompt:</label>
+      <input 
+        type="text" 
+        id="prompt" 
+        [(ngModel)]="prompt" 
+        [disabled]="loading"
+        placeholder="Digite um texto para ser tokenizado">
+    </div>
+    
+    <div class="button-container">
+      <button 
+        (click)="startTokenStream()" 
+        [disabled]="loading || !prompt.trim()">
+        Iniciar Stream
+      </button>
+      <button 
+        (click)="stopTokenStream()" 
+        [disabled]="!loading">
+        Parar Stream
+      </button>
+    </div>
+  </div>
+  
+  <div class="tokens-output">
+    <h3>Tokens Recebidos:</h3>
+    <div class="loading-indicator" *ngIf="loading">
+      <span>Recebendo tokens...</span>
+    </div>
+    <div class="tokens-container">
+      <span 
+        *ngFor="let token of tokens" 
+        class="token">
+        {{ token }}
+      </span>
+    </div>
+    <p *ngIf="tokens.length === 0 && !loading">
+      Nenhum token recebido. Inicie o streaming para ver os tokens.
+    </p>
+  </div>
+</div>

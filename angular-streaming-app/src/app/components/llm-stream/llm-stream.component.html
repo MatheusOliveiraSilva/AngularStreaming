@@ -1,0 +1,29 @@
+<div class="llm-stream-container">
+  <h2>Streaming de Resposta LLM</h2>
+  
+  <div class="button-container">
+    <button 
+      (click)="startLlmStream()" 
+      [disabled]="loading">
+      Iniciar Stream de LLM
+    </button>
+    <button 
+      (click)="stopLlmStream()" 
+      [disabled]="!loading">
+      Parar Stream
+    </button>
+  </div>
+  
+  <div class="response-output">
+    <h3>Resposta do LLM:</h3>
+    <div class="loading-indicator" *ngIf="loading">
+      <span>Recebendo resposta...</span>
+    </div>
+    <div class="response-container" [class.completed]="completed">
+      <p>{{ response || 'A resposta do LLM aparecerá aqui...' }}</p>
+    </div>
+    <div class="status-indicator" *ngIf="completed">
+      <span>✓ Resposta completa</span>
+    </div>
+  </div>
+</div>
