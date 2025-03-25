@@ -1,26 +1,23 @@
 <div class="chat-container">
   <div class="chat-header">
     <h1>{{ title }}</h1>
+    <small>Thread ID: {{ threadId }}</small>
   </div>
   
   <div class="messages-container">
     <div *ngFor="let message of messages" 
-         [ngClass]="{'message': true, 'user-message': message.role === 'user', 'assistant-message': message.role === 'assistant'}">
+         [ngClass]="{'message': true, 'user-message': message.role === 'user', 'assistant-message': message.role === 'assistant', 'streaming': message.role === 'assistant' && loading && message === messages[messages.length-1]}">
       <div class="message-content">
         <div class="message-header">
           <strong>{{ message.role === 'user' ? 'User msg' : 'Assistant message' }}</strong>
           <span class="timestamp" *ngIf="message.timestamp">{{ message.timestamp | date:'short' }}</span>
         </div>
-        <p>{{ message.content }}</p>
-      </div>
-    </div>
-    
-    <div *ngIf="loading" class="message assistant-message">
-      <div class="message-content">
-        <div class="message-header">
-          <strong>Assistant message</strong>
+        <p [innerHTML]="message.content || '&nbsp;'"></p>
+        <div *ngIf="message.role === 'assistant' && loading && message === messages[messages.length-1]" class="typing-indicator">
+          <span></span>
+          <span></span>
+          <span></span>
         </div>
-        <p class="loading">Thinking<span>.</span><span>.</span><span>.</span></p>
       </div>
     </div>
   </div>
@@ -32,6 +29,7 @@
       placeholder="Digite sua mensagem aqui..."
       (keyup.enter)="sendMessage()"
       [disabled]="loading"
+      autofocus
     />
     <button (click)="sendMessage()" [disabled]="!userMessage.trim() || loading">Enviar</button>
   </div>
